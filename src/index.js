@@ -28,6 +28,7 @@ const lists = () => {
 <div class="ip">
 <i class="fa-regular fa-square"></i>
 <p class = "text">${LIST[i].description} </p>
+
 </div>
 <div class="svg">
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -35,6 +36,7 @@ const lists = () => {
 </svg>
 </div>
 </li>
+
 `;
 
     const position = 'beforeend';

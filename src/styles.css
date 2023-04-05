@@ -63,6 +63,7 @@ h4 {
   font-size: 25px;
   margin: 25px;
   padding: 20px;
+  width: 100%;
 }
 
 .item i:hover i {
