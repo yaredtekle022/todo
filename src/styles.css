@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(238, 238, 238);
+  background-color: #fff;
   font-size: 25px;
 }
 
@@ -63,4 +63,33 @@ h4 {
   font-size: 25px;
   margin: 25px;
   padding: 20px;
+}
+
+.item i:hover i {
+  display: inline-flex;
+}
+
+svg {
+  width: 30px;
+}
+
+.add-to-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e8dfdf;
+  width: 90%;
+  margin: auto;
+}
+
+input {
+  border: none;
+}
+
+.img img {
+  width: 30px;
+}
+
+#list {
+  margin-top: 0;
 }
