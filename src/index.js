@@ -30,8 +30,8 @@ const rerender = (myList) => {
               <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
               <p class="text" id=${item.id} contenteditable>${item.todo}</p>
               </div>
-              <button class="edit" id=${id}>Edit</button>
-              <i class="fa-solid fa-trash" job="delete" id=${id}></i>
+              <button class="edit" id=${item.id}>Edit</button>
+              <i class="fa-solid fa-trash" job="delete" id=${item.id}></i>
             </li>`;
       list.append(container);
     });
@@ -71,7 +71,7 @@ const removeToDo = (element, elemenId) => {
 
   const currentList = parsedData.filter((item) => item.id !== data);
   currentList.forEach((element, index) => {
-    element.id = index;
+    element.id = index+1;
   });
 
   LIST = currentList;
@@ -90,9 +90,12 @@ list.addEventListener('click', (event) => {
   }
 
   if (event.target.classList.contains('edit')) {
-    const todos = [];
+    const t = localStorage.getItem('TODO');
+    const todos = JSON.parse(t);
     const description = event.target.previousElementSibling.children[1].textContent;
     const id = Number(event.target.getAttribute('id'));
+    console.log(id)
+    console.log(event.target)
     const selectedTodo = todos.find((todo) => todo.id === id);
     selectedTodo.todo = description;
     localStorage.setItem('TODO', JSON.stringify(todos));
