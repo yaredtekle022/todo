@@ -71,7 +71,7 @@ const removeToDo = (element, elemenId) => {
 
   const currentList = parsedData.filter((item) => item.id !== data);
   currentList.forEach((element, index) => {
-    element.id = index+1;
+    element.id = index + 1;
   });
 
   LIST = currentList;
@@ -94,8 +94,6 @@ list.addEventListener('click', (event) => {
     const todos = JSON.parse(t);
     const description = event.target.previousElementSibling.children[1].textContent;
     const id = Number(event.target.getAttribute('id'));
-    console.log(id)
-    console.log(event.target)
     const selectedTodo = todos.find((todo) => todo.id === id);
     selectedTodo.todo = description;
     localStorage.setItem('TODO', JSON.stringify(todos));
