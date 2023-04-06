@@ -50,7 +50,7 @@ addBtn.addEventListener('click', () => {
     }
     LIST.push({
       todo,
-      id: LIST.length+1,
+      id: LIST.length + 1,
       done: false,
       trash: false,
     });
