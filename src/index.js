@@ -28,10 +28,10 @@ const rerender = (myList) => {
       container.innerHTML += `<li class="item">
               <div class="left">
               <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
-              <p class="text" id=${item.id} contenteditable>${item.todo}</p>
+              <p class="text" id=${item.id}>${item.todo}</p>
               </div>
-              <button class="edit" id=${item.id}>Edit</button>
-              <i class="fa-solid fa-trash" job="delete" id=${item.id}></i>
+              <button class="edit" id=${id}${id}>Edit</button>
+              <i class="fa-solid fa-trash" job="delete" id=${id}></i>
             </li>`;
       list.append(container);
     });
@@ -50,13 +50,12 @@ addBtn.addEventListener('click', () => {
     }
     LIST.push({
       todo,
-      id: LIST.length + 1,
+      id: LIST.length,
       done: false,
       trash: false,
     });
 
     id += 1;
-
     localStorage.setItem('TODO', JSON.stringify(LIST));
   }
 
@@ -71,7 +70,7 @@ const removeToDo = (element, elemenId) => {
 
   const currentList = parsedData.filter((item) => item.id !== data);
   currentList.forEach((element, index) => {
-    element.id = index + 1;
+    element.id = index;
   });
 
   LIST = currentList;
@@ -82,20 +81,10 @@ const removeToDo = (element, elemenId) => {
 list.addEventListener('click', (event) => {
   const element = event.target;
   const elemenId = event.target.id;
-  const elementJob = element.attributes.job && element.attributes.job.value;
+  const elementJob = element.attributes.job.value;
   if (elementJob === 'complete') {
     completeToDo(element, elemenId);
   } else if (elementJob === 'delete') {
     removeToDo(element, elemenId);
-  }
-
-  if (event.target.classList.contains('edit')) {
-    const t = localStorage.getItem('TODO');
-    const todos = JSON.parse(t);
-    const description = event.target.previousElementSibling.children[1].textContent;
-    const id = Number(event.target.getAttribute('id'));
-    const selectedTodo = todos.find((todo) => todo.id === id);
-    selectedTodo.todo = description;
-    localStorage.setItem('TODO', JSON.stringify(todos));
   }
 });
