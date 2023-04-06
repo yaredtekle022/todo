@@ -1,5 +1,5 @@
 body {
-  background-color: #fff;
+  background-color: rgb(238, 238, 238);
   font-size: 25px;
 }
 
@@ -12,7 +12,7 @@ body {
   justify-content: space-between;
   background: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
-  margin-right: 20px;
+  margin-right: 140px;
 }
 
 .clear {
@@ -20,6 +20,8 @@ body {
   justify-content: flex-end;
   opacity: 0.5;
   margin-right: 20px;
+  margin-right: 200px;
+  margin-bottom: 60px;
 }
 
 .ip {
@@ -32,13 +34,10 @@ body {
   margin-top: 0;
 }
 
-.erase-section {
-  display: flex;
-  justify-content: center;
-}
-
 .text {
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {
@@ -49,9 +48,10 @@ body {
 
 .add {
   margin-top: 0;
-  margin-left: 35px;
+  margin-left: 20px;
   height: 50px;
   margin-right: 20px;
+  font-size: 30px;
 }
 
 h4 {
@@ -59,19 +59,42 @@ h4 {
   margin-bottom: 0;
 }
 
+.lineThrough {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.fa-check-circle {
+  color: #6eb200;
+}
+
+.erase-section {
+  display: flex;
+  justify-content: center;
+}
+
 .erase {
-  font-size: 25px;
-  margin: 25px;
-  padding: 20px;
+  height: 50px;
+  font-size: 20px;
   width: 100%;
+  margin-right: 140px;
+  margin-left: 40px;
 }
 
-.item i:hover i {
-  display: inline-flex;
+#input {
+  width: 80%;
+  font-size: 25px;
+  margin-left: 40px;
 }
 
-svg {
-  width: 30px;
+.input-button {
+  display: flex;
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .add-to-list {
@@ -79,18 +102,12 @@ svg {
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid #e8dfdf;
-  width: 90%;
-  margin: auto;
+  width: 100%;
+  margin-right: 140px;
 }
 
-input {
-  border: none;
-}
-
-.img img {
-  width: 30px;
-}
-
-#list {
-  margin-top: 0;
+.fa-solid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
