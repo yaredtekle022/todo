@@ -28,22 +28,24 @@
 
 # 📖 [ToDo list] <a name="about-project"></a>
 
-> ToDo list
+> Add remove and edit ToDo list 
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
 
 - Html
-- CSS3
+- CSS
 - Javascript
 
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
 
-- **Book List Section**
-- **Add Book Form**
+- **add todo list**
+- **remove todo list**
+- **edit todo list**
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,8 +103,7 @@ Clone this repository to your desired folder:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-
-- [ add and remove] 
+ 
 - [ interactive todo] 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

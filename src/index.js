@@ -1,75 +1,100 @@
-import enterImage from '../asset/enter.svg';
+import { list, input, addBtn } from './modules/variables.js';
+import completeToDo from './modules/complete.js';
+import addToDo from './modules/add.js';
 
-const list = document.getElementById('list');
-const LIST = [
-  {
+let LIST = JSON.parse(localStorage.getItem('TODO')) || [];
+let id = 0;
 
-    description: 'desc1',
-    completed: true,
-    index: 0,
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', () => {
+  localStorage.clear();
+  window.location.reload();
+});
 
-  },
+const erase = document.querySelector('.erase');
+erase.addEventListener('click', () => {
+  const updateLocal = JSON.parse(localStorage.getItem('TODO'));
 
-  {
-    description: 'desc2',
-    completed: true,
-    index: 1,
-  },
+  const currentList = updateLocal.filter((item) => item.done === false);
+  localStorage.setItem('TODO', JSON.stringify(currentList));
+  window.location.reload();
+});
+const myData = JSON.parse(localStorage.getItem('TODO'));
 
-  {
-    description: 'desc3',
-    completed: true,
-    index: 2,
-  },
-];
-const lists = () => {
-  for (let i = 0; i < LIST.length; i += 1) {
-    const text = `<li class="item">
-<div class="ip">
-<i class="fa-regular fa-square"></i>
-<p class = "text">${LIST[i].description} </p>
-
-</div>
-<div class="svg">
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-</svg>
-</div>
-</li>
-
-`;
-
-    const position = 'beforeend';
-    list.insertAdjacentHTML(position, text);
-  }
-};
-
-const loadAssets = () => {
-  const imgContainer = document.querySelector('.content .img img');
-  imgContainer.src = enterImage;
-  lists();
-};
-function removeAllTrashIcons() {
-  const items = document.querySelectorAll('.item');
-
-  if (items.length) {
-    items.forEach((item) => {
-      const svg = item.querySelector('.svg');
-      svg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-  </svg>`;
+const rerender = (myList) => {
+  if (myList) {
+    const container = document.createElement('div');
+    myList.forEach((item) => {
+      container.innerHTML += `<li class="item">
+              <div class="left">
+              <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
+              <p class="text" id=${item.id} contenteditable>${item.todo}</p>
+              </div>
+              <button class="edit" id=${id}>Edit</button>
+              <i class="fa-solid fa-trash" job="delete" id=${id}></i>
+            </li>`;
+      list.append(container);
     });
   }
-}
-window.document.addEventListener('DOMContentLoaded', loadAssets);
-list.addEventListener('click', (e) => {
-  if (e.target.matches('li')) {
-    removeAllTrashIcons();
-    const svg = e.target.querySelector('.svg');
-    svg.innerHTML = '<i class="fas fa-trash"></i>';
-  } else if (e.target.tagName === 'P') {
-    removeAllTrashIcons();
-    const svg = e.target.parentElement.nextElementSibling;
-    svg.innerHTML = '<i class="fas fa-trash"></i>';
+};
+
+rerender(myData);
+
+addBtn.addEventListener('click', () => {
+  const todo = input.value;
+
+  if (todo) {
+    addToDo(todo, id, false, false);
+    if (myData) {
+      LIST = myData;
+    }
+    LIST.push({
+      todo,
+      id: LIST.length+1,
+      done: false,
+      trash: false,
+    });
+
+    id += 1;
+
+    localStorage.setItem('TODO', JSON.stringify(LIST));
+  }
+
+  input.value = '';
+});
+const removeToDo = (element, elemenId) => {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+  LIST[elemenId].trash = true;
+  const t = localStorage.getItem('TODO');
+  const parsedData = JSON.parse(t);
+  const data = parsedData[elemenId].id;
+
+  const currentList = parsedData.filter((item) => item.id !== data);
+  currentList.forEach((element, index) => {
+    element.id = index;
+  });
+
+  LIST = currentList;
+  window.location.reload();
+  localStorage.setItem('TODO', JSON.stringify(currentList));
+};
+
+list.addEventListener('click', (event) => {
+  const element = event.target;
+  const elemenId = event.target.id;
+  const elementJob = element.attributes.job && element.attributes.job.value;
+  if (elementJob === 'complete') {
+    completeToDo(element, elemenId);
+  } else if (elementJob === 'delete') {
+    removeToDo(element, elemenId);
+  }
+
+  if (event.target.classList.contains('edit')) {
+    const todos = [];
+    const description = event.target.previousElementSibling.children[1].textContent;
+    const id = Number(event.target.getAttribute('id'));
+    const selectedTodo = todos.find((todo) => todo.id === id);
+    selectedTodo.todo = description;
+    localStorage.setItem('TODO', JSON.stringify(todos));
   }
 });
